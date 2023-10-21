@@ -1,0 +1,32 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="ingredient">
+      <h2 data-cy="ingredientDetailsHeading"><span fdTranslate="foodDeliveryBdApp.ingredient.detail.title">Ingredient</span></h2>
+
+      <hr />
+
+      <fd-alert-error></fd-alert-error>
+
+      <fd-alert></fd-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span fdTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ ingredient.id }}</span>
+        </dd>
+        <dt><span fdTranslate="foodDeliveryBdApp.ingredient.name">Name</span></dt>
+        <dd>
+          <span>{{ ingredient.name }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span fdTranslate="entity.action.back">Retour</span>
+      </button>
+
+      <button type="button" [routerLink]="['/ingredient', ingredient.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span fdTranslate="entity.action.edit">Editer</span>
+      </button>
+    </div>
+  </div>
+</div>

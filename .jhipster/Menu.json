@@ -1,0 +1,50 @@
+{
+  "applications": ["foodDeliveryBD"],
+  "changelogDate": "20231021180209",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "menu",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "price",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "Menu",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "restaurant",
+      "relationshipName": "restaurant",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "ingredient",
+      "otherEntityRelationshipName": "menu",
+      "ownerSide": true,
+      "relationshipName": "ingredient",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "tag",
+      "otherEntityRelationshipName": "menu",
+      "ownerSide": true,
+      "relationshipName": "tag",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

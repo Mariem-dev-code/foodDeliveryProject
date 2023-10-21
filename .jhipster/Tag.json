@@ -1,0 +1,29 @@
+{
+  "applications": ["foodDeliveryBD"],
+  "changelogDate": "20231021180409",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "tag",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "Tag",
+      "fieldValues": "POPULAR,NEW,PROMO"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": true,
+  "name": "Tag",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "menu",
+      "otherEntityRelationshipName": "tag",
+      "ownerSide": false,
+      "relationshipName": "menu",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

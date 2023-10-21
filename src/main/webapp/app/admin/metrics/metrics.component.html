@@ -1,0 +1,51 @@
+<div>
+  <h2>
+    <span id="metrics-page-heading" fdTranslate="metrics.title" data-cy="metricsPageHeading">Métriques de l'application</span>
+
+    <button class="btn btn-primary float-end" (click)="refresh()">
+      <fa-icon icon="sync"></fa-icon> <span fdTranslate="metrics.refresh.button">Rafraîchir</span>
+    </button>
+  </h2>
+
+  <h3 fdTranslate="metrics.jvm.title">Métriques de la JVM</h3>
+
+  <div class="row" *ngIf="metrics && !updatingMetrics">
+    <fd-jvm-memory class="col-md-4" [updating]="updatingMetrics" [jvmMemoryMetrics]="metrics.jvm"></fd-jvm-memory>
+
+    <fd-jvm-threads class="col-md-4" [threads]="threads"></fd-jvm-threads>
+
+    <fd-metrics-system class="col-md-4" [updating]="updatingMetrics" [systemMetrics]="metrics.processMetrics"></fd-metrics-system>
+  </div>
+
+  <fd-metrics-garbagecollector
+    *ngIf="metrics && metricsKeyExists('garbageCollector')"
+    [updating]="updatingMetrics"
+    [garbageCollectorMetrics]="metrics.garbageCollector"
+  ></fd-metrics-garbagecollector>
+
+  <div class="well well-lg" *ngIf="updatingMetrics" fdTranslate="metrics.updating">Mise à jour...</div>
+
+  <fd-metrics-request
+    *ngIf="metrics && metricsKeyExists('http.server.requests')"
+    [updating]="updatingMetrics"
+    [requestMetrics]="metrics['http.server.requests']"
+  ></fd-metrics-request>
+
+  <fd-metrics-endpoints-requests
+    *ngIf="metrics && metricsKeyExists('services')"
+    [updating]="updatingMetrics"
+    [endpointsRequestsMetrics]="metrics.services"
+  ></fd-metrics-endpoints-requests>
+
+  <fd-metrics-cache
+    *ngIf="metrics && metricsKeyExists('cache')"
+    [updating]="updatingMetrics"
+    [cacheMetrics]="metrics.cache"
+  ></fd-metrics-cache>
+
+  <fd-metrics-datasource
+    *ngIf="metrics && metricsKeyExistsAndObjectNotEmpty('databases')"
+    [updating]="updatingMetrics"
+    [datasourceMetrics]="metrics.databases"
+  ></fd-metrics-datasource>
+</div>

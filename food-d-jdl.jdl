@@ -1,0 +1,65 @@
+application {
+    config {
+        baseName foodDeliveryBD
+        jhiPrefix fd
+        languages [fr,en]
+        nativeLanguage fr
+        packageName com.food.delivery
+        serverPort 8080
+        applicationType monolith
+        databaseType sql
+        clientFramework angularX
+        buildTool maven
+        clientPackageManager npm
+        testFrameworks [cypress]
+        dtoSuffix DTO
+        websocket spring-websocket
+        entitySuffix Model
+        dtoSuffix Representation
+    }
+    entities *
+}
+entity Restaurant {
+	name String required
+    description String
+    adress String
+    rating Integer
+}
+
+entity Menu {
+	name String required
+    description String
+    price Long required
+}
+
+entity Ingredient {
+	name  String required
+}
+
+entity Tag {
+	name Tag 
+}
+
+enum Tag {
+    POPULAR, NEW, PROMO
+}
+
+relationship ManyToOne {
+    Menu{restaurant} to Restaurant,
+}
+
+relationship ManyToMany {
+    Menu{ingredient} to Ingredient{menu},
+    Menu{tag} to Tag{menu},
+}
+
+// Set pagination options
+paginate all with pagination
+
+// Use Data Transfer Objects (DTO)
+dto all with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl
+
+filter all

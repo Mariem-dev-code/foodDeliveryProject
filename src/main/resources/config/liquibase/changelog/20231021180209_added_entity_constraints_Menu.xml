@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity Menu.
+    -->
+    <changeSet id="20231021180209-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="restaurant_id"
+                                 baseTableName="menu"
+                                 constraintName="fk_menu__restaurant_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="restaurant"/>
+
+        <addForeignKeyConstraint baseColumnNames="menu_id"
+                                 baseTableName="rel_menu__ingredient"
+                                 constraintName="fk_rel_menu__ingredient__menu_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="menu"/>
+
+        <addForeignKeyConstraint baseColumnNames="ingredient_id"
+                                 baseTableName="rel_menu__ingredient"
+                                 constraintName="fk_rel_menu__ingredient__ingredient_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="ingredient"/>
+
+        <addForeignKeyConstraint baseColumnNames="menu_id"
+                                 baseTableName="rel_menu__tag"
+                                 constraintName="fk_rel_menu__tag__menu_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="menu"/>
+
+        <addForeignKeyConstraint baseColumnNames="tag_id"
+                                 baseTableName="rel_menu__tag"
+                                 constraintName="fk_rel_menu__tag__tag_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tag"/>
+    </changeSet>
+</databaseChangeLog>

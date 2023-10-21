@@ -1,0 +1,44 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="restaurant">
+      <h2 data-cy="restaurantDetailsHeading"><span fdTranslate="foodDeliveryBdApp.restaurant.detail.title">Restaurant</span></h2>
+
+      <hr />
+
+      <fd-alert-error></fd-alert-error>
+
+      <fd-alert></fd-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span fdTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ restaurant.id }}</span>
+        </dd>
+        <dt><span fdTranslate="foodDeliveryBdApp.restaurant.name">Name</span></dt>
+        <dd>
+          <span>{{ restaurant.name }}</span>
+        </dd>
+        <dt><span fdTranslate="foodDeliveryBdApp.restaurant.description">Description</span></dt>
+        <dd>
+          <span>{{ restaurant.description }}</span>
+        </dd>
+        <dt><span fdTranslate="foodDeliveryBdApp.restaurant.adress">Adress</span></dt>
+        <dd>
+          <span>{{ restaurant.adress }}</span>
+        </dd>
+        <dt><span fdTranslate="foodDeliveryBdApp.restaurant.rating">Rating</span></dt>
+        <dd>
+          <span>{{ restaurant.rating }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span fdTranslate="entity.action.back">Retour</span>
+      </button>
+
+      <button type="button" [routerLink]="['/restaurant', restaurant.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span fdTranslate="entity.action.edit">Editer</span>
+      </button>
+    </div>
+  </div>
+</div>

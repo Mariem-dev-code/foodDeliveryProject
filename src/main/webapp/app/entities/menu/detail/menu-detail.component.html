@@ -1,0 +1,60 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="menu">
+      <h2 data-cy="menuDetailsHeading"><span fdTranslate="foodDeliveryBdApp.menu.detail.title">Menu</span></h2>
+
+      <hr />
+
+      <fd-alert-error></fd-alert-error>
+
+      <fd-alert></fd-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span fdTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ menu.id }}</span>
+        </dd>
+        <dt><span fdTranslate="foodDeliveryBdApp.menu.name">Name</span></dt>
+        <dd>
+          <span>{{ menu.name }}</span>
+        </dd>
+        <dt><span fdTranslate="foodDeliveryBdApp.menu.description">Description</span></dt>
+        <dd>
+          <span>{{ menu.description }}</span>
+        </dd>
+        <dt><span fdTranslate="foodDeliveryBdApp.menu.price">Price</span></dt>
+        <dd>
+          <span>{{ menu.price }}</span>
+        </dd>
+        <dt><span fdTranslate="foodDeliveryBdApp.menu.restaurant">Restaurant</span></dt>
+        <dd>
+          <div *ngIf="menu.restaurant">
+            <a [routerLink]="['/restaurant', menu.restaurant.id, 'view']">{{ menu.restaurant.id }}</a>
+          </div>
+        </dd>
+        <dt><span fdTranslate="foodDeliveryBdApp.menu.ingredient">Ingredient</span></dt>
+        <dd>
+          <span *ngFor="let ingredient of menu.ingredients; let last = last">
+            <a [routerLink]="['/ingredient', ingredient.id, 'view']">{{ ingredient.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+        <dt><span fdTranslate="foodDeliveryBdApp.menu.tag">Tag</span></dt>
+        <dd>
+          <span *ngFor="let tag of menu.tags; let last = last">
+            <a [routerLink]="['/tag', tag.id, 'view']">{{ tag.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span fdTranslate="entity.action.back">Retour</span>
+      </button>
+
+      <button type="button" [routerLink]="['/menu', menu.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span fdTranslate="entity.action.edit">Editer</span>
+      </button>
+    </div>
+  </div>
+</div>

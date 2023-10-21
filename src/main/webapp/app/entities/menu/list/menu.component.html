@@ -1,0 +1,123 @@
+<div>
+  <h2 id="page-heading" data-cy="MenuHeading">
+    <span fdTranslate="foodDeliveryBdApp.menu.home.title">Menus</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span fdTranslate="foodDeliveryBdApp.menu.home.refreshListLabel">Actualiser la liste</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-menu"
+        [routerLink]="['/menu/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span fdTranslate="foodDeliveryBdApp.menu.home.createLabel"> Créer un nouveau Menu </span>
+      </button>
+    </div>
+  </h2>
+
+  <fd-alert-error></fd-alert-error>
+
+  <fd-alert></fd-alert>
+
+  <fd-filter [filters]="filters"></fd-filter>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="menus?.length === 0">
+    <span fdTranslate="foodDeliveryBdApp.menu.home.notFound">Aucun Menu trouvé</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="menus && menus.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr fdSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" fdSortBy="id">
+            <div class="d-flex">
+              <span fdTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" fdSortBy="name">
+            <div class="d-flex">
+              <span fdTranslate="foodDeliveryBdApp.menu.name">Name</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" fdSortBy="description">
+            <div class="d-flex">
+              <span fdTranslate="foodDeliveryBdApp.menu.description">Description</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" fdSortBy="price">
+            <div class="d-flex">
+              <span fdTranslate="foodDeliveryBdApp.menu.price">Price</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" fdSortBy="restaurant.id">
+            <div class="d-flex">
+              <span fdTranslate="foodDeliveryBdApp.menu.restaurant">Restaurant</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let menu of menus; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/menu', menu.id, 'view']">{{ menu.id }}</a>
+          </td>
+          <td>{{ menu.name }}</td>
+          <td>{{ menu.description }}</td>
+          <td>{{ menu.price }}</td>
+          <td>
+            <div *ngIf="menu.restaurant">
+              <a [routerLink]="['/restaurant', menu.restaurant.id, 'view']">{{ menu.restaurant.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/menu', menu.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" fdTranslate="entity.action.view">Voir</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/menu', menu.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" fdTranslate="entity.action.edit">Editer</span>
+              </button>
+
+              <button type="submit" (click)="delete(menu)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" fdTranslate="entity.action.delete">Supprimer</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="menus && menus.length > 0">
+    <div class="d-flex justify-content-center">
+      <fd-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></fd-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

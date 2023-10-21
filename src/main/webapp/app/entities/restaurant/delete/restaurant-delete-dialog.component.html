@@ -1,0 +1,28 @@
+<form *ngIf="restaurant" name="deleteForm" (ngSubmit)="confirmDelete(restaurant.id!)">
+  <div class="modal-header">
+    <h4 class="modal-title" data-cy="restaurantDeleteDialogHeading" fdTranslate="entity.delete.title">Confirmation de suppression</h4>
+
+    <button type="button" class="btn-close" data-dismiss="modal" aria-hidden="true" (click)="cancel()">&times;</button>
+  </div>
+
+  <div class="modal-body">
+    <fd-alert-error></fd-alert-error>
+    <p
+      id="fd-delete-restaurant-heading"
+      fdTranslate="foodDeliveryBdApp.restaurant.delete.question"
+      [translateValues]="{ id: restaurant.id }"
+    >
+      Êtes-vous certain de vouloir supprimer le Restaurant {{ restaurant.id }} ?
+    </p>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
+      <fa-icon icon="ban"></fa-icon>&nbsp;<span fdTranslate="entity.action.cancel">Annuler</span>
+    </button>
+
+    <button id="fd-confirm-delete-restaurant" data-cy="entityConfirmDeleteButton" type="submit" class="btn btn-danger">
+      <fa-icon icon="times"></fa-icon>&nbsp;<span fdTranslate="entity.action.delete">Supprimer</span>
+    </button>
+  </div>
+</form>

@@ -1,0 +1,56 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="user">
+      <h2>
+        <span fdTranslate="userManagement.detail.title">Utilisateur</span> [<strong>{{ user.login }}</strong
+        >]
+      </h2>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span fdTranslate="userManagement.login">Login</span></dt>
+        <dd>
+          <span>{{ user.login }}</span>
+          <span *ngIf="user.activated" class="badge bg-success" fdTranslate="userManagement.activated">Activé</span>
+          <span *ngIf="!user.activated" class="badge bg-danger" fdTranslate="userManagement.deactivated">Désactivé</span>
+        </dd>
+
+        <dt><span fdTranslate="userManagement.firstName">Prénom</span></dt>
+        <dd>{{ user.firstName }}</dd>
+
+        <dt><span fdTranslate="userManagement.lastName">Nom</span></dt>
+        <dd>{{ user.lastName }}</dd>
+
+        <dt><span fdTranslate="userManagement.email">Email</span></dt>
+        <dd>{{ user.email }}</dd>
+
+        <dt><span fdTranslate="userManagement.langKey">Langue</span></dt>
+        <dd>{{ user.langKey }}</dd>
+
+        <dt><span fdTranslate="userManagement.createdBy">Créé par</span></dt>
+        <dd>{{ user.createdBy }}</dd>
+
+        <dt><span fdTranslate="userManagement.createdDate">Créé le</span></dt>
+        <dd>{{ user.createdDate | date: 'dd/MM/yy HH:mm' }}</dd>
+
+        <dt><span fdTranslate="userManagement.lastModifiedBy">Modifié par</span></dt>
+        <dd>{{ user.lastModifiedBy }}</dd>
+
+        <dt><span fdTranslate="userManagement.lastModifiedDate">Modifié le</span></dt>
+        <dd>{{ user.lastModifiedDate | date: 'dd/MM/yy HH:mm' }}</dd>
+
+        <dt><span fdTranslate="userManagement.profiles">Droits</span></dt>
+        <dd>
+          <ul class="list-unstyled">
+            <li *ngFor="let authority of user.authorities">
+              <span class="badge bg-info">{{ authority }}</span>
+            </li>
+          </ul>
+        </dd>
+      </dl>
+
+      <button type="submit" routerLink="../../" class="btn btn-info">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span fdTranslate="entity.action.back">Retour</span>
+      </button>
+    </div>
+  </div>
+</div>
